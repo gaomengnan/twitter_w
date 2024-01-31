@@ -4,12 +4,30 @@ import 'package:twitter_w/theme/pallete.dart';
 class AuthField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  const AuthField(
-      {super.key, required this.controller, required this.hintText});
+
+  final String? Function(String?)? validator;
+
+  final TextInputType keyboardType;
+  const AuthField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    // required this.formatters,
+    this.keyboardType = TextInputType.text,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
+
     return TextFormField(
+      keyboardType: keyboardType,
+      // inputFormatters: formatters,
+      // onChanged: (val){
+      //
+      // },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: validator,
       controller: controller,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(

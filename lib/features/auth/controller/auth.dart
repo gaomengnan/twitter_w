@@ -48,3 +48,21 @@ class AuthController extends StateNotifier<bool> {
     );
   }
 }
+
+// signup state
+
+class SignUpState extends StateNotifier<bool> {
+  SignUpState() : super(false);
+
+  void toggle(String email, String password) {
+    if (email != "" && password != "") {
+      state = true;
+    }else{
+      state = false;
+    }
+  }
+}
+
+final signupProvider = StateNotifierProvider<SignUpState, bool>((ref) {
+  return SignUpState();
+});

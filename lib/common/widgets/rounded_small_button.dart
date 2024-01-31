@@ -20,7 +20,7 @@ class RoundedSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: isLoading ? () {} : onTap,
+      onTap: !isLoading ? () {} : onTap,
       child: Chip(
         label: Text(
           label,
@@ -29,7 +29,7 @@ class RoundedSmallButton extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        backgroundColor: backgroundColor,
+        backgroundColor: !isLoading ? Pallete.greyColor : backgroundColor,
         labelPadding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 5,

@@ -8,6 +8,8 @@ import 'package:twitter_w/features/auth/view/login.dart';
 import 'package:twitter_w/features/auth/widgets/auth_field.dart';
 import 'package:twitter_w/theme/pallete.dart';
 
+RegExp get _emailRegex => RegExp(r'^\S+@\S+$');
+
 class SignUpView extends ConsumerStatefulWidget {
   const SignUpView({super.key});
 
@@ -35,6 +37,23 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    emailController.addListener(() {
+      ref.read(signupProvider.notifier).toggle(
+            emailController.text,
+            passwordController.text,
+          );
+    });
+    passwordController.addListener(() {
+      ref.read(signupProvider.notifier).toggle(
+        emailController.text,
+        passwordController.text,
+      );
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _tapGestureRecognizer.dispose();
@@ -44,7 +63,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authControllerProvider);
+    final isLoading = ref.watch(signupProvider);
     // print("isloading: $isLoading");
     return Scaffold(
       appBar: appBar,
@@ -62,6 +81,17 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 AuthField(
                   controller: emailController,
                   hintText: "email",
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (val) {
+                    if(val == null || val.isEmpty) {
+                      return "Please enter a value";
+                    }
+                    if (!_emailRegex.hasMatch(val)) {
+                      return 'Email address is not valid';
+                    }
+                    return null;
+                  },
+
                 ),
 
                 const SizedBox(height: 25),
