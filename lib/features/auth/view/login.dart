@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:twitter_w/common/widgets/common.dart';
 import 'package:twitter_w/constants/constants.dart';
+import 'package:twitter_w/features/auth/view/signup.dart';
 import 'package:twitter_w/features/auth/widgets/auth_field.dart';
 import 'package:twitter_w/theme/pallete.dart';
 
@@ -89,7 +90,13 @@ class _LoginViewState extends State<LoginView> {
                           color: Pallete.blueColor,
                           fontSize: 16,
                         ),
-                        recognizer: _tapGestureRecognizer..onTap = () {},
+                        recognizer: _tapGestureRecognizer
+                          ..onTap = () {
+                            Navigator.pushReplacement(
+                              context,
+                              SignUpView.route(),
+                            );
+                          },
                       ),
                     ],
                   ),

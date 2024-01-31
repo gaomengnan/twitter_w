@@ -22,18 +22,13 @@ class RoundedSmallButton extends StatelessWidget {
     return InkWell(
       onTap: isLoading ? () {} : onTap,
       child: Chip(
-        label: isLoading
-            ? const CircularProgressIndicator(
-                color: Pallete.blueColor,
-                strokeWidth: 2,
-              )
-            : Text(
-                label,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 16,
-                ),
-              ),
+        label: Text(
+          label,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 16,
+          ),
+        ),
         backgroundColor: backgroundColor,
         labelPadding: const EdgeInsets.symmetric(
           horizontal: 20,
