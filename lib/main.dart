@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_w/features/auth/view/login.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:twitter_w/features/auth/view/signup.dart';
 import 'package:twitter_w/theme/app_theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.theme,
-      home: const LoginView(),
+      home: const SignUpView(),
     );
   }
 }

@@ -31,6 +31,8 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     super.dispose();
     _tapGestureRecognizer.dispose();
+    passwordController.dispose();
+    emailController.dispose();
   }
 
   @override
