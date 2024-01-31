@@ -6,11 +6,13 @@ class RoundedSmallButton extends StatelessWidget {
   final String label;
   final Color backgroundColor;
   final Color textColor;
+  final bool isLoading;
 
   const RoundedSmallButton({
     super.key,
     required this.onTap,
     required this.label,
+    this.isLoading = false,
     this.backgroundColor = Pallete.whiteColor,
     this.textColor = Pallete.backgroundColor,
   });
@@ -18,15 +20,20 @@ class RoundedSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isLoading ? () {} : onTap,
       child: Chip(
-        label: Text(
-          label,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 16,
-          ),
-        ),
+        label: isLoading
+            ? const CircularProgressIndicator(
+                color: Pallete.blueColor,
+                strokeWidth: 2,
+              )
+            : Text(
+                label,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                ),
+              ),
         backgroundColor: backgroundColor,
         labelPadding: const EdgeInsets.symmetric(
           horizontal: 20,

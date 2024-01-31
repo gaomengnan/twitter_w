@@ -29,6 +29,16 @@ class AuthController extends StateNotifier<bool> {
       password: password,
     );
 
+    // state = false;
+    Future.delayed(
+      const Duration(
+        seconds: 1,
+      ),
+      () {
+        state = false;
+      },
+    );
+
     res.fold(
       (l) => showSnakebar(
         context,

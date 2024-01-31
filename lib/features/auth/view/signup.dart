@@ -44,12 +44,16 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(authControllerProvider);
+    // print("isloading: $isLoading");
     return Scaffold(
       appBar: appBar,
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,6 +80,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                   child: RoundedSmallButton(
                     onTap: onSignUp,
                     label: "Done",
+                    isLoading: isLoading,
                     // backgroundColor: Pallete.backgroundColor,
                     // textColor: Pallete.whiteColor,
                   ),
