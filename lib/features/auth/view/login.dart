@@ -23,6 +23,9 @@ class _LoginViewState extends State<LoginView> {
   final passwordController = TextEditingController();
   final _tapGestureRecognizer = TapGestureRecognizer();
 
+  final FocusNode _passwordFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +37,8 @@ class _LoginViewState extends State<LoginView> {
     _tapGestureRecognizer.dispose();
     passwordController.dispose();
     emailController.dispose();
+    _passwordFocus.dispose();
+    _emailFocus.dispose();
   }
 
   @override
@@ -52,6 +57,7 @@ class _LoginViewState extends State<LoginView> {
                 AuthField(
                   controller: emailController,
                   hintText: "email",
+                  focusNode: _emailFocus,
                 ),
 
                 const SizedBox(height: 25),
@@ -59,6 +65,7 @@ class _LoginViewState extends State<LoginView> {
                 AuthField(
                   controller: passwordController,
                   hintText: "password",
+                  focusNode: _passwordFocus,
                 ),
 
                 const SizedBox(

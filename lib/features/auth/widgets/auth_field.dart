@@ -3,6 +3,7 @@ import 'package:twitter_w/theme/pallete.dart';
 
 class AuthField extends StatelessWidget {
   final TextEditingController controller;
+  final FocusNode focusNode;
   final String hintText;
 
   final String? Function(String?)? validator;
@@ -11,6 +12,7 @@ class AuthField extends StatelessWidget {
   const AuthField({
     super.key,
     required this.controller,
+    required this.focusNode,
     required this.hintText,
     // required this.formatters,
     this.keyboardType = TextInputType.text,
@@ -19,14 +21,17 @@ class AuthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return TextFormField(
+      // onFieldSubmitted: (val) {
+      //   print(val);
+      // },
+      focusNode: focusNode,
       keyboardType: keyboardType,
       // inputFormatters: formatters,
       // onChanged: (val){
       //
       // },
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      // autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(

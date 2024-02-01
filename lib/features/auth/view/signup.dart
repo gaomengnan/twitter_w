@@ -27,6 +27,8 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
   final passwordController = TextEditingController();
   final _tapGestureRecognizer = TapGestureRecognizer();
 
+  final FocusNode _passwordFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
   // SignUp
   void onSignUp() {
     ref.read(authControllerProvider.notifier).signup(
@@ -47,9 +49,9 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     });
     passwordController.addListener(() {
       ref.read(signupProvider.notifier).toggle(
-        emailController.text,
-        passwordController.text,
-      );
+            emailController.text,
+            passwordController.text,
+          );
     });
   }
 
@@ -59,6 +61,8 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     _tapGestureRecognizer.dispose();
     emailController.dispose();
     passwordController.dispose();
+    _passwordFocus.dispose();
+    _emailFocus.dispose();
   }
 
   @override
@@ -80,10 +84,11 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 // input 1 email
                 AuthField(
                   controller: emailController,
+                  focusNode: _emailFocus,
                   hintText: "email",
                   keyboardType: TextInputType.emailAddress,
                   validator: (val) {
-                    if(val == null || val.isEmpty) {
+                    if (val == null || val.isEmpty) {
                       return "Please enter a value";
                     }
                     if (!_emailRegex.hasMatch(val)) {
@@ -91,12 +96,12 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                     }
                     return null;
                   },
-
                 ),
 
                 const SizedBox(height: 25),
                 // input 2
                 AuthField(
+                  focusNode: _passwordFocus,
                   controller: passwordController,
                   hintText: "password",
                 ),
